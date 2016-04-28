@@ -14,11 +14,4 @@ public class HomeController
         return "home";
     }
 
-    @RequestMapping(value= "/nohome", method= RequestMethod.GET)
-    public String nohome()
-    {
-        return "nohome";
-    }
-
-
 }
