@@ -7,6 +7,7 @@
           <element id="module-output" name="TestJavaRush7" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
           <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-core:7.0.65" />
           <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-el:7.0.65" />
           <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-logging-juli:7.0.65" />
