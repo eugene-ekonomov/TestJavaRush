@@ -1,14 +1,27 @@
 package ru.ekonomov.data;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "user")
 public class User
 {
-    private static int currentId=1;
+    @Id
+    @GeneratedValue
+    @Length(max=8)
     private int id;
+    @Column(name = "name")
+    @Length(max = 25)
     private String name;
+    @Column(name = "age")
+    @Length(max = 11)
     private int age;
+    @Column(name = "isAdmin")
     private boolean isAdmin;
+    @Column(name = "createdDate")
     private Date createdDate;
 
     @Override
@@ -27,41 +40,43 @@ public class User
         return id;
     }
 
-    public int getAge()
-    {
-        return age;
-    }
-
-    public Date getCreatedDate()
-    {
-        return createdDate;
-    }
-
-    public int getId()
-    {
+    public int getId() {
         return id;
     }
 
-    public boolean isAdmin()
-    {
-        return isAdmin;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public User(String name, Date createdDate) {
-        this(18, createdDate, currentId++, false, name);
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public User(int age, Date createdDate, int id, boolean isAdmin, String name)
-    {
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
         this.age = age;
-        this.createdDate = createdDate;
-        this.id = id;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
-        this.name = name;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 }

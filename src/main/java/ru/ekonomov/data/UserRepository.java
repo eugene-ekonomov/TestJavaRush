@@ -1,7 +1,11 @@
 package ru.ekonomov.data;
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository
+import java.util.List;
+import java.util.UUID;
+
+public interface UserRepository extends JpaRepository<User, UUID>
 {
-    List<User> findUsers(long max, int count);
 }

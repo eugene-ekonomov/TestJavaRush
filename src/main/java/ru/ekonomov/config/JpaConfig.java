@@ -21,14 +21,21 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackageClasses = User.class)
+
 public class JpaConfig implements TransactionManagementConfigurer
 {
-    private String driver = "com.mysql.jdbc.Driver";
-    private String url = "jdbc:mysql://localhost:3306/test";
-    private String username = "root";
-    private String password = "root";
-    private String dialect = "org.hibernate.dialect.MySQL5InnoDBDialect";
-    private String hbm2ddlAuto = "update";
+    @Value("${dataSource.driverClassName}")
+    private String driver;
+    @Value("${dataSource.url}")
+    private String url;
+    @Value("${dataSource.username}")
+    private String username;
+    @Value("${dataSource.password}")
+    private String password;
+    @Value("${hibernate.dialect}")
+    private String dialect;
+    @Value("${hibernate.hbm2ddl.auto}")
+    private String hbm2ddlAuto;
 
 
     @Bean
@@ -44,7 +51,7 @@ public class JpaConfig implements TransactionManagementConfigurer
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean configureEntityManagerFactory()
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory()
     {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(configureDataSource());
@@ -59,7 +66,7 @@ public class JpaConfig implements TransactionManagementConfigurer
         return entityManagerFactoryBean;
     }
 
-    @Bean
+    @Bean(name="transactionManager")
     public PlatformTransactionManager annotationDrivenTransactionManager()
     {
         return new JpaTransactionManager();

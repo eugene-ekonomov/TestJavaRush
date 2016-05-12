@@ -27,7 +27,7 @@ public class HomeControllerTest
         MockMvc mockMvc = standaloneSetup(homeController).build();
         mockMvc.perform(get("/")).andExpect(view().name("home"));
     }
-    @Test
+    /*@Test
     public void shouldShowUsers() throws Exception
     {
         List<User> lu = createUserList(20);
@@ -65,5 +65,5 @@ public class HomeControllerTest
             lu.add(new User("User " + i, new Date()));
         }
         return lu;
-    }
+    }*/
 }

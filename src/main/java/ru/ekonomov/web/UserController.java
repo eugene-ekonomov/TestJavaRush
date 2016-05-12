@@ -12,20 +12,15 @@ import ru.ekonomov.data.UserRepository;
 @RequestMapping("/users")
 public class UserController
 {
-
+    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    public UserController(UserRepository userRepository)
-    {
-        this.userRepository = userRepository;
-    }
     @RequestMapping(method= RequestMethod.GET)
     public String users(@RequestParam(value="max", defaultValue =  "9223372036854775807") long max,
                         @RequestParam(value="count", defaultValue = "20") int count,
                         Model model)
     {
-        model.addAttribute("userList", userRepository.findUsers(max, count));
+        model.addAttribute("userList", userRepository.findAll());
         return "users";
     }
 }
