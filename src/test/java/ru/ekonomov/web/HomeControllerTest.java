@@ -2,20 +2,10 @@ package ru.ekonomov.web;
 
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.servlet.view.InternalResourceView;
-import ru.ekonomov.data.User;
-import ru.ekonomov.data.UserRepository;
-import ru.ekonomov.web.HomeController;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import static org.hamcrest.core.IsCollectionContaining.hasItems;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 
 public class HomeControllerTest
@@ -34,7 +24,7 @@ public class HomeControllerTest
         UserRepository mockRepository = mock(UserRepository.class);
         when(mockRepository.findUsers(Long.MAX_VALUE, 20)).thenReturn(lu);
 
-        UserController controller = new UserController(mockRepository);
+        HomeController controller = new HomeController(mockRepository);
 
         MockMvc mockMvc = standaloneSetup(controller).setSingleView(new InternalResourceView("/WEB-INF/views/users.jsp")).build();
         mockMvc.perform(get("/users"))
@@ -49,7 +39,7 @@ public class HomeControllerTest
         UserRepository mockRepository = mock(UserRepository.class);
         when(mockRepository.findUsers(23890, 50)).thenReturn(lu);
 
-        UserController controller = new UserController(mockRepository);
+        HomeController controller = new HomeController(mockRepository);
 
         MockMvc mockMvc = standaloneSetup(controller).setSingleView(new InternalResourceView("/WEB-INF/views/users.jsp")).build();
         mockMvc.perform(get("/users?max=23890&count=50"))

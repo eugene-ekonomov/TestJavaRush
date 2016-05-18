@@ -22,4 +22,5 @@ INSERT INTO `user` (`name`,age,isAdmin) VALUES ('Jack','18',FALSE);
 INSERT INTO `user` (`name`,age,isAdmin) VALUES ('Brandon','54',FALSE);
 INSERT INTO `user` (`name`,age,isAdmin) VALUES ('Руслан','22',FALSE);
 INSERT INTO `user` (`name`,age,isAdmin) VALUES ('Григорий','33',FALSE);
+INSERT INTO `user` (`name`,age,isAdmin) VALUES ('Константин','38',FALSE);
 COMMIT;

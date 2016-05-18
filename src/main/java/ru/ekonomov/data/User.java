@@ -11,13 +11,11 @@ public class User
 {
     @Id
     @GeneratedValue
-    @Length(max=8)
     private int id;
     @Column(name = "name")
     @Length(max = 25)
     private String name;
     @Column(name = "age")
-    @Length(max = 11)
     private int age;
     @Column(name = "isAdmin")
     private boolean isAdmin;
