@@ -25,6 +25,6 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
     @Override
     protected Filter[] getServletFilters()
     {
-        return new Filter[]{new FormEncodingSetterFilter()};
+        return new Filter[]{new FormEncodingSetterFilter()}; 
     }
 }
