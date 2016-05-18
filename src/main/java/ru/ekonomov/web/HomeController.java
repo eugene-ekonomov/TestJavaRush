@@ -3,15 +3,14 @@ package ru.ekonomov.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.ekonomov.data.User;
 import ru.ekonomov.data.UserRepository;
 import ru.ekonomov.service.UserService;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.logging.Logger;
 
 @Controller
 public class HomeController
@@ -25,12 +24,11 @@ public class HomeController
         return "home";
     }
 
-    @RequestMapping(value = "/users", method= RequestMethod.GET)
-    public String getUsers(@RequestParam(value="max", defaultValue =  "9223372036854775807") long max,
-                        @RequestParam(value="count", defaultValue = "20") int count,
-                        Model model)
+    @RequestMapping(value = "/users/{page}", method= RequestMethod.GET)
+    public String getUsers( @PathVariable("page") int page, Model model)
     {
-        model.addAttribute("userList", userService.findAll());
+        model.addAttribute("userList", userService.pagedList(page-1));
+        //model.addAttribute("name", "");
         return "userspage";
     }
 
@@ -68,5 +66,31 @@ public class HomeController
     {
         userService.create(user);
         return "addedpage";
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public String delete(@RequestParam(value="id", required=true) Integer id, Model model)
+    {
+
+        userService.delete(id);
+
+        // Add id reference to Model
+        model.addAttribute("id", id);
+
+        // This will resolve to /WEB-INF/jsp/deletedpage.jsp
+        return "deletedpage";
+    }
+
+    @RequestMapping(value = "/finduserbyname", method = RequestMethod.POST)
+    public String findUserByName(@ModelAttribute("name") String name, Model model)
+    {
+        Logger.getLogger(this.getClass().getName()).log(java.util.logging.Level.ALL, name);
+        List<User> userList = userService.search(name);
+        if(userList!=null)
+        {
+            model.addAttribute("userList", userList);
+        }
+        return "finduserbyname";
+
     }
 }

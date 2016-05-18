@@ -1,5 +1,8 @@
 package ru.ekonomov.service;
 
+import ch.qos.logback.classic.Level;
+import org.apache.commons.logging.Log;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Service;
 import ru.ekonomov.data.User;
 import ru.ekonomov.data.UserRepository;
@@ -7,6 +10,7 @@ import ru.ekonomov.data.UserRepository;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 @Transactional
@@ -40,9 +44,14 @@ public class UserServiceImpl implements UserService
 
     @Override
     @Transactional
-    public List<User> findAll()
+    public PagedListHolder<User> pagedList(int page)
     {
-        return userRepository.findAll();
+        List<User> userList = userRepository.findAll();
+        PagedListHolder<User> pagedUserList = new PagedListHolder<>(userList);
+        pagedUserList.setPageSize(10);
+        pagedUserList.setPage(page);
+        return pagedUserList;
+
     }
 
     @Override
@@ -53,7 +62,7 @@ public class UserServiceImpl implements UserService
         oldUser.setAge(user.getAge());
         oldUser.setCreatedDate(user.getCreatedDate());
         oldUser.setId(user.getId());
-        oldUser.setIsAdmin(user.isAdmin());
+        oldUser.setAdmin(user.isAdmin());
         oldUser.setName(user.getName());
         return oldUser;
     }
@@ -62,6 +71,7 @@ public class UserServiceImpl implements UserService
     @Transactional
     public List<User> search(String s)
     {
+        Logger.getLogger(this.getClass().getName()).log(java.util.logging.Level.ALL, s);
         return userRepository.findByName(s);
     }
 }

@@ -26,7 +26,7 @@
 
     <tr>
       <td><form:label path="admin">isAdmin</form:label></td>
-      <td><form:input path="admin"/></td>
+      <td><form:checkbox path="admin" /></td>
     </tr>
   </table>
 

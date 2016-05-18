@@ -13,7 +13,7 @@
 <h1>Users</h1>
 <p>You have edited a user with id ${id} at <%= new java.util.Date() %></p>
 
-<c:url var="usersUrl" value="/users" />
+<c:url var="usersUrl" value="/users/1" />
 <p>Return to <a href="${usersUrl}">List</a></p>
 
 </body>

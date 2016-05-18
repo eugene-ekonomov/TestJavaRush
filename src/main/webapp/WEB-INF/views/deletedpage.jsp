@@ -6,15 +6,15 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>Added Page</title>
+  <title>Deleted Page</title>
 </head>
 <body>
 
-<h1>Added</h1>
-<p>You have added a new person at <%= new java.util.Date() %></p>
+<h1>Users</h1>
+<p>You have deleted a person with id ${id} at <%= new java.util.Date() %></p>
 
 <c:url var="usersUrl" value="/users/1" />
-<p>Return to <a href="${usersUrl}">User List</a></p>
+<p>Return to <a href="${usersUrl}">Users List</a></p>
 
 </body>
 </html>

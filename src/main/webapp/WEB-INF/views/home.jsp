@@ -8,6 +8,6 @@
 <body>
 <h1>Welcome to CRUD test web application</h1>
 <br/>
-<a href="<c:url value="/users" />">users</a> |
+<a href="<c:url value="/users/1" />">users</a> |
 </body>
 </html>
