@@ -16,8 +16,6 @@ import javax.annotation.Resource;
 @Controller
 public class HomeController
 {
-    //@Autowired
-    //private UserRepository userRepository;
     @Resource(name = "userServiceImpl")
     private UserService userService;
 
