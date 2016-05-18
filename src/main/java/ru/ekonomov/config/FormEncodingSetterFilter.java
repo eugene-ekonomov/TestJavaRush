@@ -1,8 +1,11 @@
-package ru.ekonomov.web;
+package ru.ekonomov.config;
+
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 import javax.servlet.*;
 
+@Component
 public class FormEncodingSetterFilter implements Filter
 {
 

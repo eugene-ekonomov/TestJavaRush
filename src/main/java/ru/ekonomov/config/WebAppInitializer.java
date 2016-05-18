@@ -1,5 +1,8 @@
 package ru.ekonomov.config;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import javax.servlet.Filter;
+
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer
 {
     @Override
@@ -17,5 +20,11 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
     protected Class<?>[] getServletConfigClasses()
     {
         return new Class<?>[] { WebConfig.class };
+    }
+
+    @Override
+    protected Filter[] getServletFilters()
+    {
+        return new Filter[]{new FormEncodingSetterFilter()};
     }
 }
