@@ -52,17 +52,18 @@
 </c:if>
 <a href="${addUrl}">Add</a> a person.
 
-<c:url var="saveUrl" value="/finduserbyname" />
-<form method="POST" action="${saveUrl}">
+
+<form method="GET" action="/finduserbyid">
   <table>
     <tr>
-      <td><label path="name">name:</label></td>
-      <td><input path="name"/></td>
+      <td><label name="id">id:</label></td>
+      <td><input type="number" name="id" value="0"/></td>
     </tr>
   </table>
 
   <input type="submit" value="Search" />
 </form>
+
 
 </body>
 </html>

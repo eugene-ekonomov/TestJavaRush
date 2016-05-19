@@ -3,7 +3,8 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page session="false" %>
+<%@ page session="false" language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
   <title>Users</title>
@@ -22,19 +23,20 @@
   </thead>
   <tbody>
   <tr>
-    <c:forEach items="${userList}" var="user">
   <tr>
     <td>${user.id}</td>
     <td>${user.name}</td>
     <td>${user.age}</td>
     <td>${user.admin}</td>
     <td>${user.createdDate}</td>
-    <td><a href="<c:url value='/edit/${user.id}'/>">Edit</a></td>
-    <td><a href="<c:url value='/remove/${user.id}'/>">Delete</a></td>
+    <td><a href="<c:url value='/edit?id=${user.id}'/>">Edit</a></td>
+    <td><a href="<c:url value='/delete?id=${user.id}'/>">Delete</a></td>
   </tr>
-  </c:forEach>
   </tr>
   </tbody>
 </table>
+
+<c:url var="usersUrl" value="/users/1" />
+<p>Return to <a href="${usersUrl}">User List</a></p>
 </body>
 </html>

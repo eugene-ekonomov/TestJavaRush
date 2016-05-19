@@ -9,6 +9,17 @@ import java.util.Date;
 @Table(name = "user")
 public class User
 {
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", isAdmin=" + isAdmin +
+                ", createdDate=" + createdDate +
+                '}';
+    }
+
     @Id
     @GeneratedValue
     private int id;

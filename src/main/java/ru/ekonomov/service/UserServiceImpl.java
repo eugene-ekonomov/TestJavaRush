@@ -1,40 +1,34 @@
 package ru.ekonomov.service;
 
-import ch.qos.logback.classic.Level;
-import org.apache.commons.logging.Log;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.ekonomov.data.User;
 import ru.ekonomov.data.UserRepository;
 
 import javax.annotation.Resource;
-import javax.transaction.Transactional;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Service
 @Transactional
 public class UserServiceImpl implements UserService
 {
     @Resource
-    UserRepository userRepository;
+    public UserRepository userRepository;
 
     @Override
-    @Transactional
     public User create(User user)
     {
         return userRepository.save(user);
     }
 
     @Override
-    @Transactional
     public User findById(int id)
     {
         return userRepository.findOne(id);
     }
 
     @Override
-    @Transactional
     public User delete(int id)
     {
         User deletedUser = userRepository.findOne(id);
@@ -43,7 +37,6 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    @Transactional
     public PagedListHolder<User> pagedList(int page)
     {
         List<User> userList = userRepository.findAll();
@@ -55,7 +48,6 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    @Transactional
     public User update(User user)
     {
         User oldUser = userRepository.getOne(user.getId());
@@ -65,13 +57,5 @@ public class UserServiceImpl implements UserService
         oldUser.setAdmin(user.isAdmin());
         oldUser.setName(user.getName());
         return oldUser;
-    }
-
-    @Override
-    @Transactional
-    public List<User> search(String s)
-    {
-        Logger.getLogger(this.getClass().getName()).log(java.util.logging.Level.ALL, s);
-        return userRepository.findByName(s);
     }
 }

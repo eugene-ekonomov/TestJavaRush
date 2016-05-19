@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 public class HomeController
 {
     @Resource(name = "userServiceImpl")
-    private UserService userService;
+    public UserService userService;
 
     @RequestMapping(value = "/", method= RequestMethod.GET)
     public String home()
@@ -28,7 +28,6 @@ public class HomeController
     public String getUsers( @PathVariable("page") int page, Model model)
     {
         model.addAttribute("userList", userService.pagedList(page-1));
-        //model.addAttribute("name", "");
         return "userspage";
     }
 
@@ -44,13 +43,8 @@ public class HomeController
                            @RequestParam(value="id", required=true) Integer id,
                            Model model)
     {
-        // Delegate to PersonService for editing
         userService.update(user);
-
-        // Add id reference to Model
         model.addAttribute("id", id);
-
-        // This will resolve to /WEB-INF/jsp/editedpage.jsp
         return "editedpage";
     }
 
@@ -71,26 +65,20 @@ public class HomeController
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String delete(@RequestParam(value="id", required=true) Integer id, Model model)
     {
-
         userService.delete(id);
-
-        // Add id reference to Model
         model.addAttribute("id", id);
-
-        // This will resolve to /WEB-INF/jsp/deletedpage.jsp
         return "deletedpage";
     }
 
-    @RequestMapping(value = "/finduserbyname", method = RequestMethod.POST)
-    public String findUserByName(@ModelAttribute("name") String name, Model model)
+    @RequestMapping(value = "/finduserbyid", method = RequestMethod.GET)
+    public String findUserById(@RequestParam(value="id", required=true) Integer id, Model model)
     {
-        Logger.getLogger(this.getClass().getName()).log(java.util.logging.Level.ALL, name);
-        List<User> userList = userService.search(name);
-        if(userList!=null)
+        User user = userService.findById(id);
+        if(user!=null)
         {
-            model.addAttribute("userList", userList);
+            model.addAttribute("user", user);
         }
-        return "finduserbyname";
+        return "finduserbyid";
 
     }
 }
